@@ -1,0 +1,18 @@
+html {
+  font-size: 20px; 
+  font-family: "Open Sans", sans-serif; 
+  background-color: #DBE8EA;
+}
+canvas {
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block;
+}    
+h1,h2,h3,h4 {
+  font-size: 20px;
+  text-align: center;
+}
+img{display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+ width="430";height="650"}
