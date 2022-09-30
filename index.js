@@ -12,7 +12,8 @@ function main(){
 	let timer,time;
     let score=0;
 	let keep = false,unture=false;judge=false;
-
+//画框架函数line
+function line(){
     for(let i=0;i<6;i++){
         ctx.beginPath();
         ctx.moveTo(x[0],y[i]);
@@ -27,6 +28,8 @@ function main(){
         ctx.closePath();
         ctx.stroke();
     }
+}
+line();
 	//生成随机数一到四
 	function ran(){
 		return Math.floor(Math.random()*4)}	
@@ -88,20 +91,7 @@ function main(){
             a[0]=ran();
             ctx.fillStyle="#1b1b1b";
             ctx.fillRect(x[a[0]]+1, y[0]+1, 100, 100);
-	    	for(let i=0;i<6;i++){
-            ctx.beginPath();
-            ctx.moveTo(x[0],y[i]);
-            ctx.lineTo(x[4],y[i]);
-            ctx.closePath();
-            ctx.stroke();
-        }
-            for(let i=0;i<5;i++){
-            ctx.beginPath();
-            ctx.moveTo(x[i],y[0]);
-            ctx.lineTo(x[i],y[5]);
-            ctx.closePath();
-            ctx.stroke();
-        }
+	    	line();
 		}
 		else if(keep){
             alert("wrong!your score is"+score);
