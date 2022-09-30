@@ -12,16 +12,14 @@ function main(){
 	let timer,time;
     let score=0;
 	let keep = false,unture=false;judge=false;
-//横
-    for(let i=0;i<7;i++){
+
+    for(let i=0;i<6;i++){
         ctx.beginPath();
         ctx.moveTo(x[0],y[i]);
         ctx.lineTo(x[4],y[i]);
         ctx.closePath();
         ctx.stroke();
     }
-    
-//竖
     for(let i=0;i<5;i++){
         ctx.beginPath();
         ctx.moveTo(x[i],y[0]);
@@ -31,12 +29,8 @@ function main(){
     }
 	//生成随机数一到四
 	function ran(){
-		return Math.floor(Math.random()*4)}
-	
-	
-//此处随机涂黑
-
-    function beblack(){
+		return Math.floor(Math.random()*4)}	
+//此处随机涂黑全图
         for(let i=0;i<5;i++){
             ctx.fillStyle="#FFFFFF";
             ctx.fillRect(x[a[i]]+1, y[i]+1, 100, 100);
@@ -46,33 +40,27 @@ function main(){
             ctx.fillStyle="#1b1b1b";
             ctx.fillRect(x[a[i]]+1, y[i]+1, 100, 100);
         }  
-     }
-    beblack();
- 
-
 	//以上初始界面绘画完毕，此处为游戏逻辑,其中judge用于判断操作对错,keep用于计算时间是否足够,untrue用于判断错误发生
-
 	window.addEventListener("keydown",keydown);
     function keydown(click1){
         let b=["KeyA","KeyS","KeyD","KeyF"];
         if(click1.code=="KeyR"){
             window.location.reload();
             return;
-        }
-        if(keep==false&&unture==false){
+        }if(keep==false&&unture==false){//
             time = 30;
             keep = true;
             timer = setInterval(function(){
                 time=time-0.01;
                 time=Math.round(time*100)/100
-                timing.innerHTML="<h4>YOU HAVE "+time+" SECOND</h4>"
+                timing.innerHTML="<h1>left time: "+time+" S</h1>"
                 if(time<0){
-                    timing.innerHTML="<h4>time is up</h4>";
-                    alert("YOUR SCOURE IS"+score);
+                    timing.innerHTML="<h2>time is up</h2>";
+                    alert("score:"+score);
                     clearInterval(timer);
 					keep = false,unture = true;
                 }
-            }, 100)
+            }, 10)
             return;
         }
         
@@ -100,24 +88,20 @@ function main(){
             a[0]=ran();
             ctx.fillStyle="#1b1b1b";
             ctx.fillRect(x[a[0]]+1, y[0]+1, 100, 100);
-			
-//横
-    for(let i=0;i<6;i++){
-        ctx.beginPath();
-        ctx.moveTo(x[0],y[i]);
-        ctx.lineTo(x[4],y[i]);
-        ctx.closePath();
-        ctx.stroke();
-    }
-    
-//竖
-    for(let i=0;i<5;i++){
-        ctx.beginPath();
-        ctx.moveTo(x[i],y[0]);
-        ctx.lineTo(x[i],y[5]);
-        ctx.closePath();
-        ctx.stroke();
-    }
+	    	for(let i=0;i<6;i++){
+            ctx.beginPath();
+            ctx.moveTo(x[0],y[i]);
+            ctx.lineTo(x[4],y[i]);
+            ctx.closePath();
+            ctx.stroke();
+        }
+            for(let i=0;i<5;i++){
+            ctx.beginPath();
+            ctx.moveTo(x[i],y[0]);
+            ctx.lineTo(x[i],y[5]);
+            ctx.closePath();
+            ctx.stroke();
+        }
 		}
 		else if(keep){
             alert("wrong!your score is"+score);
