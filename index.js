@@ -2,16 +2,16 @@
 function main(){
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d'); 
-    let timing=document.getElementById("time");
+	ctx.fillStyle="#FFFFFF";
+    ctx.fillRect(150,10,400,500);
+    ctx.lineWidth = 5;
+	let a=[];
+    let x = [150,250,350,450,550],y = [10,110,210,310,410,510];
+	let timing=document.getElementById("time");
     let counter=document.getElementById("score");
-    let x = [150,250,350,450,550];
-    let y = [10,110,210,310,410,510];
 	let timer,time;
     let score=0;
 	let keep = false,unture=false;judge=false;
-    ctx.fillStyle="#FFFFFF";
-    ctx.fillRect(150,10,400,500);
-    ctx.lineWidth = 5;
 //横
     for(let i=0;i<7;i++){
         ctx.beginPath();
@@ -29,16 +29,20 @@ function main(){
         ctx.closePath();
         ctx.stroke();
     }
+	//生成随机数一到四
+	function ran(){
+		return Math.floor(Math.random()*4)}
+	
 	
 //此处随机涂黑
-    let a=[];
+
     function beblack(){
         for(let i=0;i<5;i++){
             ctx.fillStyle="#FFFFFF";
             ctx.fillRect(x[a[i]]+1, y[i]+1, 100, 100);
         }
         for(let i=0;i<5;i++){
-            a[i]=Math.floor(Math.random()*4);
+            a[i]=ran();
             ctx.fillStyle="#1b1b1b";
             ctx.fillRect(x[a[i]]+1, y[i]+1, 100, 100);
         }  
@@ -59,15 +63,14 @@ function main(){
             time = 30;
             keep = true;
             timer = setInterval(function(){
-                time=time-0.1;
-                time=Math.round(time*10)/10
-                timing.innerHTML="<h4>YOU HAVE"+time+"SECOND</h4>"
+                time=time-0.01;
+                time=Math.round(time*100)/100
+                timing.innerHTML="<h4>YOU HAVE "+time+" SECOND</h4>"
                 if(time<0){
+                    timing.innerHTML="<h4>time is up</h4>";
                     alert("YOUR SCOURE IS"+score);
                     clearInterval(timer);
-                    timing.innerHTML="<h4>time is up</h4>";
-                    keep = false;
-                    unture = true;
+					keep = false,unture = true;
                 }
             }, 100)
             return;
@@ -80,7 +83,7 @@ function main(){
             judge=false;
         }
 		
-		//成功完成一次游戏,移动色块,或者出结果
+		//成功完成一次游戏,移动色块并重新绘制,或者出结果
         if(judge&&keep){
             score++;
             counter.innerHTML="<h4>score:"+score;
@@ -94,11 +97,11 @@ function main(){
                 ctx.fillRect(x[a[i]]+1, y[i]+1, 100, 100);
             }
  
-            a[0]=Math.floor(Math.random()*4);
+            a[0]=ran();
             ctx.fillStyle="#1b1b1b";
             ctx.fillRect(x[a[0]]+1, y[0]+1, 100, 100);
 			
-        //横
+//横
     for(let i=0;i<6;i++){
         ctx.beginPath();
         ctx.moveTo(x[0],y[i]);
@@ -119,8 +122,7 @@ function main(){
 		else if(keep){
             alert("wrong!your score is"+score);
             clearInterval(timer);
-            keep = false;
-            unture = true;
+            keep = false,unture = true;
         }
     }
 }
